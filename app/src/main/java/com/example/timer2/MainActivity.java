@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -116,7 +117,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Toast.makeText(MainActivity.this, "Workout complete", Toast.LENGTH_SHORT).show();
+                // Get the Vibrator system service
+                Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+                // Vibrate for 500 milliseconds
+                vibrator.vibrate(500);
+
+                Toast.makeText(MainActivity.this, "Workout complete currently in rest phase", Toast.LENGTH_SHORT).show();
                 mTimerRunning = false;
                 //on finish activate boolean to start timer 2
                 mIsResting = true;
@@ -129,6 +136,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFinish() {
+                        // Get the Vibrator system service
+                        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+                        // Vibrate for 500 milliseconds
+                        vibrator.vibrate(500);
+
                         //display text and set condition to false
                         mIsResting = false;
                         Toast.makeText(MainActivity.this, "Timer has been completed", Toast.LENGTH_SHORT).show();
